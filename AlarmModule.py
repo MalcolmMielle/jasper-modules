@@ -6,6 +6,7 @@ Made it a thread.
 import datetime
 import re
 import os
+import subprocess
 from threading import Thread, Lock
 from app_utils import getTimezone
 from semantic.dates import DateService
@@ -29,6 +30,10 @@ def alarmclock(profile, mic,*args):
 
 			if(hour_now==h and min_now==m):
 				print 'ringing !'
+				#TODO integrate it with xbmc
+				cmd='vlc '+profile['alarm_file']
+				print cmd
+				subprocess.Popen(cmd, shell=True) 
 				#suppress the hour if ringed
 				del hours[i]
 				finished=0
