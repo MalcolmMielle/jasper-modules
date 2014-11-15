@@ -2,7 +2,7 @@
 import duckduckgo
 import re
 
-WORDS = ["DUCKDUCKGO", "SEARCH"]
+WORDS = ["DUCKDUCKGO", "SEARCH", "GOOGLE"]
 
 def handle(text, mic, profile):
 	"""
@@ -63,4 +63,4 @@ def isValid(text):
         Arguments:
         text -- user-input, typically transcribed speech
     """
-    return bool(re.search(r'\bduckduckgo|search\b', text, re.IGNORECASE))
+    return bool(re.search(r'\bduckduckgo|search|google\b', text, re.IGNORECASE))
