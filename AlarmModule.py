@@ -17,8 +17,10 @@ hours = []
 lock = Lock()
 
 def alarmclock(profile, mic,*args):
+	#TODO have a better finishing codition
 	print 'set up !'
 	finished=1
+	#TODO while depending on hours length
 	while(finished == 1):
 		tz = getTimezone(profile)
 		now = datetime.datetime.now(tz=tz)
@@ -53,7 +55,7 @@ def handle(text, mic, profile):
     """
 	mic.say("Setting up alarm, what hour do you want it to ring ?")
 	#Setting arguments
-	#Ask for th hour
+	#Ask for the hour
 	#Listen to the answer
 	hour=mic.activeListen()
 	hour=int(hour)
@@ -68,38 +70,6 @@ def handle(text, mic, profile):
 	
 	if(len(hours)==1):
 		Thread(target=alarmclock,args=(profile,mic,1)).start()
-	
-	"""
-		Fork the process. Child is an alarm clock while the parent continue Jasper.
-		Problem with multiple alarm being multiple process instead of having only one with multiple time :S
-	"""
-	thefile = open(os.path.join(os.path.dirname(__file__),'AlarmFile.txt'), 'w')
-	try:
-		thefile.write("hour : %s min : %s\n" % (hour, min))
-	finally:
-		thefile.close()
-	
-	
-	'''
-	newpid = os.fork()
-	if newpid == 0:
-		print 'Your alarm clock is the process ',  os.getpid( )
-		finished=1
-		while(finished == 1):
-			tz = getTimezone(profile)
-			now = datetime.datetime.now(tz=tz)
-			hour_now = now.hour
-			min_now = now.minute
-			#mic.say("it is now %s %s ad alarm is %s %s" % (hour_now, min_now, hour, min))
-			if(hour_now==hour and min==min_now):
-				print 'ringing !'
-				finished=0
-		print 'exit'
-		os._exit(0)  
-	else:
-		pids = (os.getpid(), newpid)
-		print "parent: %d, child: %d" % pids
-	'''
 	
 	
 def isValid(text):
