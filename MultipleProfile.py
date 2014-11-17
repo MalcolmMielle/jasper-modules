@@ -17,6 +17,8 @@ def handle(text, mic, profile):
 		os.putenv('JASPER_CONFIG', '/home/malcolm/.jasper-'+input)
 	
 	mic.say('Hello '+input+" . You're the new user now" )
+	
+	#TODO replace by directly reading the config file and changing the var profile 
 	argument = list()
 	argument.append(sys.argv[0])
 	for arg in sys.argv[1:]:
