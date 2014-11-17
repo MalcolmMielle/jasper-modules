@@ -16,7 +16,7 @@ Module List
 + Multiple Profile : Module to use multiple profile with Jasper : 
   + Use populate as usual
   + Change the .jasper name to .jasper-yourname (leave the deafault profile as .jasper)
-  + Now upon calling for a new profile enter by hand the name of the new user then Jasper will start again with the newly profile.
+  + Now upon calling for a new profile enter by hand the name of the new user then Jasper will start again with the new profile.
 
 + DuckDuckGo : Module to make research with one click on duckduckgo
 
