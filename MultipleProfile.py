@@ -86,6 +86,7 @@ def getNewProfile(mic, profile):
 						"to '%s'", tts_engine_slug)
 	tts_engine_class = tts.get_engine_by_slug(tts_engine_slug)
 
+	#TODO To test !
 	flag=0
 	for arg in sys.argv[1:]:
 		if(arg == '--local'):
