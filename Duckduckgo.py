@@ -14,8 +14,7 @@ def getResults(question, mic):
 	switch=False
 	count=0
 	count_topics=0
-	print len(result.related)-1
-	#if result.type=='disambiguation':
+
 	if result.type!='nothing':
 		while flag:
 			try:
@@ -65,10 +64,11 @@ def handle(text, mic, profile):
 		#get last element
 		question=re.split('what is', text)[-1]
 		question=" ".join("" if s in useless_search_word else s for s in question.split())
-		print question
+
 	else:
 		mic.say('What would like me to search ?')
 		question=mic.activeListen()
+		question=" ".join("" if s in useless_search_word else s for s in question.split())
 	
 	getResults(question, mic)
 	
