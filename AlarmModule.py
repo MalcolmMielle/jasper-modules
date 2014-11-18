@@ -17,11 +17,10 @@ hours = []
 lock = Lock()
 
 def alarmclock(profile, mic,*args):
-	#TODO have a better finishing codition
+
 	print 'set up !'
-	finished=1
-	#TODO while depending on hours length
-	while(finished == 1):
+
+	while(len(hours)!=0):
 		tz = getTimezone(profile)
 		now = datetime.datetime.now(tz=tz)
 		lock.acquire(True)
@@ -38,9 +37,8 @@ def alarmclock(profile, mic,*args):
 				subprocess.Popen(cmd, shell=True) 
 				#suppress the hour if ringed
 				del hours[i]
-				finished=0
 		lock.release()
-	print 'exit'
+	print 'exit, no more alarm to ring'
 	
 
 def handle(text, mic, profile):

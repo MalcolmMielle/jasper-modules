@@ -106,7 +106,7 @@ def sayWhoYouAre(mic, profile):
 	mic.say('Your name is : '+profile['first_name'])
 	mic.say('Your family name is : '+profile['last_name'])
 	mic.say('You live at : '+profile['location'])
-	#mic.say('Your gmail account is : '+profile['gmail_address'])
+	mic.say('Your gmail account is : '+profile['gmail_address'])
 	
 
 def handle(text, mic, profile):
