@@ -4,6 +4,9 @@ import re
 
 WORDS = ["DUCKDUCKGO", "SEARCH", "GOOGLE"]
 
+#Word determine as useless in a search
+useless_search_word = ["a", "and", "the"]
+
 
 def getResults(question, mic):
 	result=duckduckgo.query(question)
@@ -61,7 +64,7 @@ def handle(text, mic, profile):
 		#print re.split('what is', text)
 		#get last element
 		question=re.split('what is', text)[-1]
-		question=" ".join("" if s in ["a"] else s for s in question.split())
+		question=" ".join("" if s in useless_search_word else s for s in question.split())
 		print question
 	else:
 		mic.say('What would like me to search ?')
