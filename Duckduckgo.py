@@ -4,27 +4,16 @@ import re
 
 WORDS = ["DUCKDUCKGO", "SEARCH", "GOOGLE"]
 
-def handle(text, mic, profile):
-	"""
-        Search on duckduckgo for information
 
-        Arguments:
-        text -- user-input, typically transcribed speech
-        mic -- used to interact with the user (for both input and output)
-        profile -- contains information related to the user (e.g., phone
-                   number)
-    """
-    
-    
-	mic.say('What would like me to search ?')
-	question=mic.activeListen()
+def getResults(question, mic):
 	result=duckduckgo.query(question)
 	flag=True
 	switch=False
 	count=0
 	count_topics=0
 	print len(result.related)-1
-	if result.type=='disambiguation':
+	#if result.type=='disambiguation':
+	if result.type!='nothing':
 		while flag:
 			try:
 				if(switch==False):	
@@ -54,7 +43,31 @@ def handle(text, mic, profile):
 
 	else :
 		#get the best results
-		print duckduckgo.get_zci(question)
+		mic.say('I had no results. Here is my best shot !')
+		mic.say(duckduckgo.get_zci(question))
+
+
+def handle(text, mic, profile):
+	"""
+        Search on duckduckgo for information
+
+        Arguments:
+        text -- user-input, typically transcribed speech
+        mic -- used to interact with the user (for both input and output)
+        profile -- contains information related to the user (e.g., phone
+                   number)
+    """
+	if re.search('what is',text):
+		#print re.split('what is', text)
+		#get last element
+		question=re.split('what is', text)[-1]
+		question=" ".join("" if s in ["a"] else s for s in question.split())
+		print question
+	else:
+		mic.say('What would like me to search ?')
+		question=mic.activeListen()
+	
+	getResults(question, mic)
 	
 def isValid(text):
     """
