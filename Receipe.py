@@ -22,14 +22,11 @@ def handle(text, mic, profile):
 		with open('inventory.inv', 'r') as filename:
 			inventoryarr = pickle.load(filename)
 			filename.close()
+			list_item=inventoryarr.items()
+			#Query a receipe
+			mic.say(recipepuppy.get_recipe(list_item))
 	except IOError:
 		mic.say("No inventory on computer. I can't find your food.")
-		break
-	list_item=inventoryarr.items()
-	#Query a receipe
-	mic.say(recipepuppy.get_recipe(list_item))
-	
-	
 	
 
 def isValid(text):
