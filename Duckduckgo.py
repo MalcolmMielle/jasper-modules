@@ -24,7 +24,7 @@ def getResults(question, mic):
 					mic.say(result.related[count].topics[count_topics].text)
 				mic.say('Were you talking about this ?')
 				yesno=mic.activeListen()
-				if yesno=='no' and count<len(result.related)-1:
+				if re.search('no',yesno) and count<len(result.related)-1:
 					if switch==False:
 						count=count+1
 					else:
@@ -33,7 +33,7 @@ def getResults(question, mic):
 							count=count+1
 						else:
 							count_topics=count_topics+1
-				elif yesno=='yes' :
+				elif re.search('yes', yesno):
 					flag=False
 					mic.say('Glad I could help you')
 				else:
