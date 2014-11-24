@@ -2,6 +2,7 @@
 import re
 import recipepuppy
 import pickle
+import os
 
 WORDS = ["RECIPE"]
 
@@ -19,12 +20,13 @@ def handle(text, mic, profile):
                    number)
     """
 	try:
-		with open('~/.inventory/inventory.inv', 'r') as filename:
+		with open(os.path.expanduser('~/.inventory/inventory.inv'), 'r') as filename:
 			inventoryarr = pickle.load(filename)
 			filename.close()
 			list_item=inventoryarr.items()
+			print list_item
 			#Query a receipe
-			mic.say(recipepuppy.get_recipe(list_item))
+			#mic.say(recipepuppy.get_recipe(list_item))
 	except IOError:
 		mic.say("No inventory on computer. I can't find your food. Make sure it's at ~/.inventory/inventory.inv")
 	
