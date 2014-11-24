@@ -3,7 +3,7 @@ import re
 import recipepuppy
 import pickle
 
-WORDS = ["RECEIPE"]
+WORDS = ["RECIPE"]
 
 def handle(text, mic, profile):
 	"""
@@ -19,14 +19,14 @@ def handle(text, mic, profile):
                    number)
     """
 	try:
-		with open('inventory.inv', 'r') as filename:
+		with open('~/.inventory/inventory.inv', 'r') as filename:
 			inventoryarr = pickle.load(filename)
 			filename.close()
 			list_item=inventoryarr.items()
 			#Query a receipe
 			mic.say(recipepuppy.get_recipe(list_item))
 	except IOError:
-		mic.say("No inventory on computer. I can't find your food.")
+		mic.say("No inventory on computer. I can't find your food. Make sure it's at ~/.inventory/inventory.inv")
 	
 
 def isValid(text):
@@ -36,4 +36,4 @@ def isValid(text):
         Arguments:
         text -- user-input, typically transcribed speech
     """
-    return bool(re.search(r'\breceipe\b', text, re.IGNORECASE))
+    return bool(re.search(r'\brecipe\b', text, re.IGNORECASE))
