@@ -10,6 +10,10 @@ Or :
 
 	https://github.com/crazedpsyc/python-duckduckgo
 	
+Install cleverbot api
+
+	https://github.com/folz/cleverbot.py
+	
 Module List
 ===========
 
