@@ -12,41 +12,48 @@ def getResults(question, mic):
 	result=duckduckgo.query(question)
 	flag=True
 	switch=False
-	count=0
+	count=1
 	count_topics=0
-
-	if result.type!='nothing':
-		while flag:
-			try:
-				if(switch==False):	
-					mic.say(result.related[count].text)
-				else:
-					mic.say(result.related[count].topics[count_topics].text)
-				mic.say('Were you talking about this ?')
-				yesno=mic.activeListen()
-				if re.search('no',yesno) and count<len(result.related)-1:
-					if switch==False:
-						count=count+1
+	#Look at the best (hopefully) answer first
+	mic.say(duckduckgo.get_zci(question))
+	mic.say('Were you talking about this ?')
+	yesno=mic.activeListen()
+	if re.search('no',yesno):
+		if result.type=='exclusive':
+			mic.say(result.answer.text)
+		elif result.type!='nothing':
+			while flag:
+				try:
+					if(switch==False):	
+						mic.say(result.related[count].text)
 					else:
-						if(count_topics==len(result.related[count].topics)-1):
-							count_topics=0
+						mic.say(result.related[count].topics[count_topics].text)
+					mic.say('Were you talking about this ?')
+					yesno=mic.activeListen()
+					if re.search('no',yesno) and count<len(result.related)-1:
+						if switch==False:
 							count=count+1
 						else:
-							count_topics=count_topics+1
-				elif re.search('yes', yesno):
-					flag=False
-					mic.say('Glad I could help you')
-				else:
-					flag=False
-					mic.say("OK I'll stop")
-			#Switch to topics
-			except Exception:
-				switch=True
+							if(count_topics==len(result.related[count].topics)-1):
+								count_topics=0
+								count=count+1
+							else:
+								count_topics=count_topics+1
+					elif re.search('yes', yesno):
+						flag=False
+						mic.say('Glad I could help you')
+					else:
+						flag=False
+						mic.say("OK I'll stop")
+				#Switch to topics
+				except Exception:
+					switch=True
 
-	else :
-		#get the best results
-		mic.say('I had no results. Here is my best shot !')
-		mic.say(duckduckgo.get_zci(question))
+		else :
+			#get the best results
+			mic.say("Sorry, sometime, I'm no good...")
+	else:
+		mic.say('Glad I could help you')
 
 
 def handle(text, mic, profile):
