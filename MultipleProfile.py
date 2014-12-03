@@ -10,13 +10,14 @@ import copy
 
 from client import tts, stt, jasperpath, diagnose
 
-
+PRIORITY = 10
 
 WORDS = ["PROFILE", "WHO AM I"]
 
 def getNewProfile(mic, profile):
 	
-	mic.say('May I know who you are ? Write your name please.')
+	#This line bug !
+	mic.say('Who are you?')
 	input = raw_input("Your name : ")
 	
 	if input=='':
@@ -110,8 +111,8 @@ def sayWhoYouAre(mic, profile):
 	
 
 def handle(text, mic, profile):
-	
-	if re.search('profile', text):
+	print text
+	if re.search('PROFILE', text):
 		getNewProfile(mic, profile)
 	else:
 		sayWhoYouAre(mic, profile)	

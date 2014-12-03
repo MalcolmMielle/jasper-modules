@@ -7,7 +7,7 @@ import os
 
 import webbrowser
 
-WORDS = ["RECIPE"]
+WORDS = ["RECIPE", "FOOD"]
 
 def handle(text, mic, profile):
 	"""
@@ -51,4 +51,4 @@ def isValid(text):
         Arguments:
         text -- user-input, typically transcribed speech
     """
-    return bool(re.search(r'\brecipe\b', text, re.IGNORECASE))
+    return bool(re.search(r'\brecipe|food\b', text, re.IGNORECASE))
